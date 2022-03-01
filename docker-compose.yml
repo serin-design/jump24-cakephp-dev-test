@@ -1,0 +1,47 @@
+version: "3.9"
+services:
+  web:
+    container_name: jump24-web
+    image: nginx:latest
+    restart: unless-stopped
+    volumes:
+      - ./docker/nginx/site.conf:/etc/nginx/conf.d/site.conf
+      - ./webroot:/var/www/webroot
+    ports:
+      - "8000:80"
+      - "8443:443"
+    working_dir: /var/www/webroot
+    networks:
+      - jump24-network
+    depends_on:
+      - app
+  app:
+    container_name: jump24-app
+    image: php:7.2-fpm-alpine
+    restart: unless-stopped
+    volumes:
+      - ./:/var/www
+    working_dir: /var/www
+    networks:
+      - jump24-network
+    depends_on:
+      - db
+  db:
+    container_name: jump24-db
+    image: mysql:8.0
+    restart: unless-stopped
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_DATABASE: "jump24"
+      MYSQL_USER: "demo"
+      MYSQL_PASSWORD: "password"
+    networks:
+      - jump24-network
+volumes:
+  mysql-data:
+    driver: local
+networks:
+  jump24-network:
+    driver: bridge
