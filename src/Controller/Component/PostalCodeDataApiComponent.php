@@ -26,6 +26,11 @@ class PostalCodeDataApiComponent extends Component
         // fetch the data from the api
         $response = $http->get('https://api.getthedata.com/postcode/' . rawurlencode($postalCode));
 
+        // if the request was not successful, throw an error to be caught by the application
+        if (!$response->isSuccess()) {
+            throw new CakeException('There was a problem fetching data from API');
+        }
+
         // convert response json into array
         $json = $response->getJson();
 

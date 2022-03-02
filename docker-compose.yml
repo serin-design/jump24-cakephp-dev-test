@@ -35,10 +35,10 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
-      MYSQL_ROOT_PASSWORD: "secret"
+      MYSQL_ROOT_PASSWORD: "supersecret"
       MYSQL_DATABASE: "my_app"
-      MYSQL_USER: "secret"
-      MYSQL_PASSWORD: "my_app"
+      MYSQL_USER: "my_app"
+      MYSQL_PASSWORD: "secret"
     networks:
       - jump24-network
 volumes:
