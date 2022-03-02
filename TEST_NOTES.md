@@ -23,3 +23,28 @@ pagination.
 
 Unfortunately I did not get time to complete test coverage of the users import component however the same princible
 would have been applied here with needing validation before inserting into the db and applying tests.
+
+## Running the Application
+
+These are the steps to set up, text and run the application.
+
+### 1. Build Docker Environment
+
+    docker-compose build
+    docker-compse up -d
+
+### 2. Execute DB Migrations
+
+    docker exec -it jump24-php bin/cake migrations migrate
+
+### 3. Execute Unit Tests
+
+    docker exec -it jump24-php vendor/bin/phpunit
+
+### 4. Execute Postal Code Command
+
+    docker exec -it jump24-php bin/cake fetch_postal_code
+
+### 5. Execute Import User Data From API Command
+
+    docker exec -it jump24-php bin/cake import_users_from_api

@@ -15,8 +15,8 @@ RUN set -xe \
         g++ \
     && update-ca-certificates \
     && docker-php-ext-configure intl \
-    && docker-php-ext-install intl mysqli pdo pdo_mysql \
-    && docker-php-ext-enable intl mysqli pdo pdo_mysql \
+    && docker-php-ext-install intl mysqli pdo pdo_mysql pdo_sqlite \
+    && docker-php-ext-enable intl mysqli pdo pdo_mysql pdo_sqlite \
     && { find /usr/local/lib -type f -print0 | xargs -0r strip --strip-all -p 2>/dev/null || true; } \
     && apk del .build-deps \
     && rm -rf /tmp/* /usr/local/lib/php/doc/* /var/cache/apk/*
