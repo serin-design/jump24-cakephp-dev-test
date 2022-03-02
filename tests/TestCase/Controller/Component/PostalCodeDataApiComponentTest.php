@@ -3,6 +3,7 @@
 namespace App\Test\TestCase\Controller\Component;
 
 use App\Controller\Component\PostalCodeDataApiComponent;
+use App\Test\TestCase\ApplicationTest;
 use Cake\Controller\ComponentRegistry;
 use Cake\Controller\Controller;
 use Cake\Core\Exception\CakeException;
@@ -11,7 +12,7 @@ use Cake\Http\ServerRequest;
 use Cake\TestSuite\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
 
-class PostalCodeDataApiComponentTest extends TestCase
+class PostalCodeDataApiComponentTest extends ApplicationTest
 {
     /**
      * @var PostalCodeDataApiComponent
