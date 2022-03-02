@@ -46,7 +46,7 @@ class ApplicationTest extends IntegrationTestCase
     }
 
     /**
-     * testBootstrapPluginWitoutHalt
+     * testBootstrapPluginWithoutHalt
      *
      * @return void
      */

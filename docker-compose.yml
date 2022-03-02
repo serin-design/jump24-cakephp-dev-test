@@ -1,7 +1,7 @@
 version: "3.9"
 services:
-  web:
-    container_name: jump24-web
+  nginx:
+    container_name: jump24-nginx
     image: nginx:latest
     restart: unless-stopped
     volumes:
@@ -14,10 +14,12 @@ services:
     networks:
       - jump24-network
     depends_on:
-      - app
-  app:
-    container_name: jump24-app
-    image: php:7.2-fpm-alpine
+      - php
+  php:
+    container_name: jump24-php
+    build:
+      dockerfile: ./docker/php/Dockerfile
+      context: ./
     restart: unless-stopped
     volumes:
       - ./:/var/www
@@ -25,18 +27,18 @@ services:
     networks:
       - jump24-network
     depends_on:
-      - db
-  db:
-    container_name: jump24-db
+      - mysql
+  mysql:
+    container_name: jump24-mysql
     image: mysql:8.0
     restart: unless-stopped
     volumes:
       - mysql-data:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: "secret"
-      MYSQL_DATABASE: "jump24"
-      MYSQL_USER: "demo"
-      MYSQL_PASSWORD: "password"
+      MYSQL_DATABASE: "my_app"
+      MYSQL_USER: "secret"
+      MYSQL_PASSWORD: "my_app"
     networks:
       - jump24-network
 volumes:
